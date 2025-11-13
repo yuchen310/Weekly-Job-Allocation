@@ -1,13 +1,15 @@
 export interface Staff {
   id: string;
   name: string;
+  email: string;
+  role: string;
+  department: string;
+  phone: string; // Now required, not optional
   skills: string[];
   preferences: string[];
-  availability: {
-    [key: string]: boolean[]; // day -> hours (true = available)
-  };
-  workload: number; // current assigned hours
-  maxWorkload: number; // maximum allowed hours
+  availability: Record<string, boolean[]>;
+  workload: number;
+  maxWorkload: number;
 }
 export interface Job {
   id: string;

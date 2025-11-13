@@ -5,6 +5,15 @@ import JobAllocationPage from './pages/JobAllocationPage';
 import StaffPortal from './pages/StaffPortal';
 import ITAdminPortal from './pages/ITAdminPortal';
 type UserRole = 'manager' | 'staff' | 'itadmin';
+import UserManagement from './components/UserManagement';
+import { getStaffMembers, addStaff, updateStaff, deleteStaff } from './utils/mockData';
+
+<UserManagement
+  users={getStaffMembers()}
+  onAddUser={addStaff}
+  onUpdateUser={updateStaff}
+  onDeleteUser={deleteStaff}
+/>
 export function App() {
   const [userRole, setUserRole] = useState<UserRole>('manager');
   return <BrowserRouter>

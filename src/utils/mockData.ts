@@ -14,111 +14,77 @@ const getWeekDates = () => {
 };
 export const weekDates = getWeekDates();
 export const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-export const staffMembers: Staff[] = [{
-  id: 'staff1',
-  name: 'John Smith',
-  skills: ['Driving', 'Customer Service'],
-  preferences: ['Morning Shift', 'Driving'],
-  availability: {
-    Monday: Array(24).fill(true),
-    Tuesday: Array(24).fill(true),
-    Wednesday: Array(24).fill(false),
-    Thursday: Array(24).fill(true),
-    Friday: Array(24).fill(true),
-    Saturday: Array(24).fill(false),
-    Sunday: Array(24).fill(false)
+export let staffMembers: Staff[] = [
+  {
+    id: 'staff1',
+    name: 'Jane Smith',
+    email: 'jane.smith@example.com',
+    role: 'Manager',
+    department: 'Product',
+    phone: '81234567',
+    skills: ['Driving', 'Customer Service'],
+    preferences: ['Morning Shift', 'Driving'],
+    availability: {
+      Monday: Array(24).fill(true),
+      Tuesday: Array(24).fill(true),
+      Wednesday: Array(24).fill(false),
+      Thursday: Array(24).fill(true),
+      Friday: Array(24).fill(true),
+      Saturday: Array(24).fill(false),
+      Sunday: Array(24).fill(false)
+    },
+    workload: 20,
+    maxWorkload: 40
   },
-  workload: 20,
-  maxWorkload: 40
-}, {
-  id: 'staff2',
-  name: 'Emma Johnson',
-  skills: ['Administration', 'Scheduling'],
-  preferences: ['Afternoon Shift', 'Administration'],
-  availability: {
-    Monday: Array(24).fill(true),
-    Tuesday: Array(24).fill(false),
-    Wednesday: Array(24).fill(true),
-    Thursday: Array(24).fill(true),
-    Friday: Array(24).fill(false),
-    Saturday: Array(24).fill(true),
-    Sunday: Array(24).fill(false)
-  },
-  workload: 32,
-  maxWorkload: 40
-}, {
-  id: 'staff3',
-  name: 'Michael Brown',
-  skills: ['Driving', 'Maintenance'],
-  preferences: ['Night Shift', 'Maintenance'],
-  availability: {
-    Monday: Array(24).fill(false),
-    Tuesday: Array(24).fill(true),
-    Wednesday: Array(24).fill(true),
-    Thursday: Array(24).fill(false),
-    Friday: Array(24).fill(true),
-    Saturday: Array(24).fill(true),
-    Sunday: Array(24).fill(true)
-  },
-  workload: 15,
-  maxWorkload: 40
-}, {
-  id: 'staff4',
-  name: 'Sarah Davis',
-  skills: ['Customer Service', 'Administration'],
-  preferences: ['Morning Shift', 'Customer Service'],
-  availability: {
-    Monday: Array(24).fill(true),
-    Tuesday: Array(24).fill(true),
-    Wednesday: Array(24).fill(true),
-    Thursday: Array(24).fill(false),
-    Friday: Array(24).fill(false),
-    Saturday: Array(24).fill(false),
-    Sunday: Array(24).fill(true)
-  },
-  workload: 28,
-  maxWorkload: 40
-}, {
-  id: 'staff5',
-  name: 'David Wilson',
-  skills: ['Driving', 'Maintenance', 'Customer Service'],
-  preferences: ['Afternoon Shift', 'Driving'],
-  availability: {
-    Monday: Array(24).fill(false),
-    Tuesday: Array(24).fill(false),
-    Wednesday: Array(24).fill(true),
-    Thursday: Array(24).fill(true),
-    Friday: Array(24).fill(true),
-    Saturday: Array(24).fill(true),
-    Sunday: Array(24).fill(true)
-  },
-  workload: 35,
-  maxWorkload: 40
-}, {
-  id: 'staff6',
-  name: 'Lisa Anderson',
-  skills: ['Customer Service'],
-  preferences: ['Morning Shift', 'Customer Service'],
-  availability: {
-    Monday: Array(24).fill(true),
-    Tuesday: Array(24).fill(true),
-    Wednesday: Array(24).fill(true),
-    Thursday: Array(24).fill(true),
-    Friday: Array(24).fill(true),
-    Saturday: Array(24).fill(false),
-    Sunday: Array(24).fill(false)
-  },
-  workload: 42,
-  maxWorkload: 40
-}, {
-  id: 'staff7',
-  name: 'Tom Martinez',
-  skills: ['Maintenance', 'Driving'],
-  preferences: ['Night Shift', 'Maintenance'],
-  availability: {},
-  workload: 8,
-  maxWorkload: 40
-}];
+  {
+    id: 'staff2',
+    name: 'Bob Johnson',
+    email: 'bob.johnson@example.com',
+    role: 'Designer',
+    department: 'Design',
+    phone: '81234567',
+    skills: ['Administration', 'Scheduling'],
+    preferences: ['Afternoon Shift', 'Administration'],
+    availability: {
+      Monday: Array(24).fill(true),
+      Tuesday: Array(24).fill(false),
+      Wednesday: Array(24).fill(true),
+      Thursday: Array(24).fill(true),
+      Friday: Array(24).fill(false),
+      Saturday: Array(24).fill(true),
+      Sunday: Array(24).fill(false)
+    },
+    workload: 32,
+    maxWorkload: 40
+  }
+];
+
+export const addStaff = (staff: Omit<Staff, 'id'>): void => {
+  const newStaff: Staff = {
+    ...staff,
+    id: `staff${Date.now()}` // Use timestamp for unique ID
+  };
+  staffMembers.push(newStaff);
+};
+
+export const updateStaff = (id: string, updates: Partial<Staff>): void => {
+  const index = staffMembers.findIndex(s => s.id === id);
+  if (index !== -1) {
+    staffMembers[index] = { ...staffMembers[index], ...updates };
+  }
+};
+
+export const deleteStaff = (id: string): void => {
+  const index = staffMembers.findIndex(s => s.id === id);
+  if (index !== -1) {
+    staffMembers.splice(index, 1);
+  }
+};
+
+export const getStaffMembers = (): Staff[] => {
+  return staffMembers;
+};
+
 export const jobs: Job[] = [{
   id: 'job1',
   title: 'Train Driver - Morning Route',
