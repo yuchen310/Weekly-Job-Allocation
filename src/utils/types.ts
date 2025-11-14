@@ -20,7 +20,8 @@ export interface Job {
   startTime: number;
   endTime: number;
   assignedStaff?: string[];
-  rejectedBy?: string[]; // staff IDs who rejected this job
+  rejectedBy?: string[];
+  rejectedReasons?: string[];
 }
 export interface Roster {
   weekStarting: string;
