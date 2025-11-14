@@ -9,6 +9,7 @@ import {
   getStaffMissingAvailability,
   rosters,
   weekDates,
+  staffMembers,
 } from "../utils/mockData";
 
 import { Job } from "../utils/types";
@@ -34,7 +35,10 @@ const Dashboard: React.FC = () => {
       .filter((job) => job.rejectedBy && job.rejectedBy.length > 0)
       .map((job) => ({
         job,
-        rejectedByNames: job.rejectedBy || [],
+        rejectedByNames:
+          job.rejectedBy?.map((id) =>
+            staffMembers.find((s) => s.id === id)?.name || id
+          ) || [],
         rejectedReasons: job.rejectedReasons || [],
       }));
 
@@ -52,20 +56,19 @@ const Dashboard: React.FC = () => {
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       <header className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Manager Dashboard</h1>
-        <p className="text-gray-600">Overview of staff workload and availability status</p>
+        <p className="text-gray-600">
+          Overview of staff workload and availability status
+        </p>
       </header>
 
       <div className="space-y-6">
-        {/* Rejected Jobs Section */}
         <RejectedJobs rejectedJobs={rejectedJobs} />
 
-        {/* Workload Overview */}
         <WorkloadOverview
           overloadedStaff={overloadedStaff}
           lowestWorkloadStaff={lowestWorkloadStaff}
         />
 
-        {/* Missing Availability */}
         <MissingAvailability staffList={missingAvailabilityStaff} />
       </div>
     </div>
