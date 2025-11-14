@@ -42,15 +42,63 @@ export let staffMembers: Staff[] = [
     workload: 20,
     maxWorkload: 40,
   },
+
+{
+  id: "staff2",
+  name: "Bob Johnson",
+  email: "bob.johnson@example.com",
+  role: "Designer",
+  department: "Design",
+  phone: "81234567",
+  skills: ["Administration", "Scheduling"],
+  preferences: ["Afternoon Shift", "Administration"],
+  availability: {
+    Monday: Array(24).fill(true),
+    Tuesday: Array(24).fill(false),
+    Wednesday: Array(24).fill(true),
+    Thursday: Array(24).fill(true),
+    Friday: Array(24).fill(false),
+    Saturday: Array(24).fill(true),
+    Sunday: Array(24).fill(false),
+  },
+  workload: 45,        // 🔥 Overloaded
+  maxWorkload: 40
+},
+
+
+  // NEW STAFF #3 — very low workload
   {
-    id: "staff2",
-    name: "Bob Johnson",
-    email: "bob.johnson@example.com",
-    role: "Designer",
-    department: "Design",
-    phone: "81234567",
-    skills: ["Administration", "Scheduling"],
-    preferences: ["Afternoon Shift", "Administration"],
+    id: "staff3",
+    name: "Alex Tan",
+    email: "alex.tan@example.com",
+    role: "Operations",
+    department: "Transport",
+    phone: "88992233",
+    skills: ["Driving"],
+    preferences: ["Morning Shift"],
+    availability: {
+      Monday: Array(24).fill(true),
+      Tuesday: Array(24).fill(true),
+      Wednesday: Array(24).fill(true),
+      Thursday: Array(24).fill(true),
+      Friday: Array(24).fill(true),
+      Saturday: Array(24).fill(true),
+      Sunday: Array(24).fill(true),
+    },
+    workload: 8,
+    maxWorkload: 40,
+  },
+
+  // NEW STAFF #4 — medium workload
+  {
+    id: "staff4",
+    name: "Cheryl Lim",
+    email: "cheryl.lim@example.com",
+    role: "Customer Service",
+    department: "Support",
+    phone: "81112222",
+    skills: ["Customer Service"],
+    preferences: ["Afternoon Shift"],
     availability: {
       Monday: Array(24).fill(true),
       Tuesday: Array(24).fill(false),
@@ -60,10 +108,29 @@ export let staffMembers: Staff[] = [
       Saturday: Array(24).fill(true),
       Sunday: Array(24).fill(false),
     },
-    workload: 32,
+    workload: 15,
     maxWorkload: 40,
   },
+
+  // NEW STAFF #5 — heavy workload
+{
+  id: "staff5",
+  name: "Daniel Yong",
+  email: "daniel.yong@example.com",
+  role: "Technician",
+  department: "Maintenance",
+  phone: "85556677",
+  skills: ["Maintenance"],
+  preferences: ["Night Shift"],
+  
+  // ⛔ Missing availability (required for UC)
+  availability: {},    
+
+  workload: 35,
+  maxWorkload: 40
+}
 ];
+
 
 // ---------- Staff CRUD ----------
 export const addStaff = (staff: Omit<Staff, "id">): void => {
